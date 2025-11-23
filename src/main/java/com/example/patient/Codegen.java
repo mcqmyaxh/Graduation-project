@@ -12,12 +12,12 @@ public class Codegen {
         HikariDataSource dataSource = new HikariDataSource();
         dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/patient?useInformationSchema=true&characterEncoding=utf-8");
         dataSource.setUsername("root");
-        dataSource.setPassword("12136");
+        dataSource.setPassword("123456");
 
         // 创建全局配置
         GlobalConfig globalConfig = new GlobalConfig();
-        globalConfig.setBasePackage("com.example"); // 设置根包名
-        globalConfig.setGenerateTable("management_collection"); // 指定生成哪些表//
+        globalConfig.setBasePackage("com.example.patient.Customer"); // 设置根包名
+        globalConfig.setGenerateTable("user_patient"); // 指定生成哪些表//
         //KKHourse.sys_menu
         //KKHourse.sys_role
         //KKHourse.sys_role_menu
