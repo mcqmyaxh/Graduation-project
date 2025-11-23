@@ -1,0 +1,177 @@
+server:
+  port: 9011
+
+# ?????? + ??? + ??????
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: patient
+  datasource:
+    url: jdbc:mysql://localhost:3306/patient?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2b8
+    username: root
+    password: 123456          # ?? root ??????
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    druid:
+      initial-size: 3
+      max-active: 10
+      min-idle: 5
+      max-wait: 60000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: false
+
+  servlet:
+    multipart:
+      max-file-size: 1024MB
+      max-request-size: 1024MB
+
+  # ?? Redis???????
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password:
+      database: 0
+      lettuce:
+        pool:
+          max-active: 32
+          max-wait: 300
+          max-idle: 16
+          min-idle: 8
+      connect-timeout: 800
+
+# ---------- MyBatis-Flex ???? ----------
+mybatis-flex:
+  datasource:
+    # ??????????????
+    default:
+      url: jdbc:mysql://localhost:3306/patient?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2b8
+      username: root
+      password: 123456
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      druid:
+        initial-size: 3
+        max-active: 10
+        min-idle: 5
+        max-wait: 60000
+        time-between-eviction-runs-millis: 60000
+        min-evictable-idle-time-millis: 300000
+        validation-query: SELECT 1
+        test-while-idle: true
+        test-on-borrow: false
+        test-on-return: false
+        pool-prepared-statements: false
+
+  mapper-locations:
+    - classpath:mapper/*.xml
+    - classpath*:com/example/**/*Mapper.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# ---------- MyBatis-Plus??????? ----------
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+
+# ---------- Knife4j ?? ----------
+knife4j:
+  enable: true
+  production: false
+  setting:
+    language: zh_cn
+
+# ---------- ?? & Prometheus ----------
+management:
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+
+# ---------- JWT ----------
+security:
+  jwt:
+    key: patientSecret
+    ttl: 7200
+  ignore-urls:
+    - /**
+    - /H5/**
+    - /Platform/**
+    - /auth/**
+    - /doc.html/**
+    - /swagger-resources/**
+    - /swagger-ui/**
+    - /swagger-ui.html
+    - /webjars/**
+    - /v3/api-docs/**
+    - /sys_user/forbidden/**
+    - /sys_user/unforbidden/**
+
+# ---------- ??????? ----------
+wx:
+  appid: wx48a36db199ce3dc9
+  secret: 27e6bb08b12c2fa8bd2a9de2e55f841f
+
+# ---------- RocketMQ ----------
+rocketmq:
+  name-server: localhost:9876   # ?? NameServer
+  producer:
+    group: patient
+  consumer:
+    group: patient
+
+# ---------- Quartz ???????????? ----------
+org:
+  quartz:
+    scheduler:
+      instance-name: patient_scheduler
+      instance-id: AUTO
+      rmi-export: false
+      rmi-proxy: false
+      wrapJobExecutionInUserTransaction: false
+      batch-trigger-acquisition-max-count: 1
+      make-scheduler-thread-daemon: true
+    threadpool:
+      thread-pool-class: org.quartz.simpl.SimpleThreadPool
+      thread-count: 10
+      thread-priority: 5
+      threads-inherit-context-class-loader-of-initializing-thread: true
+      make-threads-daemons: true
+    jobstore:
+      isClustered: true
+      useProperties: false
+      tablePrefix: QRTZ_
+      clusterCheckinInterval: 5000
+      driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+      dataSource: quartz
+      misfireThreshold: 60000
+      maxMisfiresToHandleAtATime: 20
+      dontSetAutoCommitFalse: false
+      selectWithLockSQL: SELECT * FROM {0}LOCKS WHERE LOCK_NAME = ? FOR UPDATE
+      txIsolationLevelSerializable: false
+      job-store-class: org.quartz.impl.jdbcjobstore.JobStoreTX
+    datasource:
+      driver: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/patient?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2b8
+      user: root
+      password: 123456
+      maxConnections: 5
