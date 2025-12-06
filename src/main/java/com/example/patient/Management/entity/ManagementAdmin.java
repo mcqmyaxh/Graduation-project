@@ -1,13 +1,15 @@
-package com.example.patient.Customer.entity;
+package com.example.patient.Management.entity;
 
 import com.mybatisflex.annotation.Id;
 import com.mybatisflex.annotation.KeyType;
 import com.mybatisflex.annotation.Table;
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 
 import java.io.Serial;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -33,7 +35,7 @@ public class ManagementAdmin implements Serializable {
      * 管理员ID
      */
     @Id(keyType = KeyType.Auto)
-    private Integer adminId;
+    private BigInteger id;
 
     /**
      * 账号
@@ -45,6 +47,30 @@ public class ManagementAdmin implements Serializable {
      */
     private String password;
 
-    private LocalDateTime createdAt;
+    /**
+     * 真实姓名
+     */
+    @Schema(description = "真实姓名")
+    private String realName;
+
+    /**
+     * 手机号
+     */
+    @Schema(description = "手机号")
+    private String phone;
+
+
+
+    /**
+     * 创建时间
+     */
+    @Schema(description = "创建时间")
+    private LocalDateTime gmtCreate;
+
+    /**
+     * 更新时间
+     */
+    @Schema(description = "更新时间")
+    private LocalDateTime gmtModified;
 
 }

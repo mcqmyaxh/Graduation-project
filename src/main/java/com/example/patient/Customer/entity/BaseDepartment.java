@@ -6,7 +6,9 @@ import com.mybatisflex.annotation.Table;
 import java.io.Serializable;
 
 import java.io.Serial;
+import java.time.LocalDateTime;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,22 +30,38 @@ public class BaseDepartment implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
+    @Schema(description = "主键ID")
     @Id(keyType = KeyType.Auto)
     private Integer deptId;
 
     /**
      * 所属医院ID
      */
+    @Schema(description = "所属医院ID")
     private Integer hospitalId;
 
     /**
      * 科室名称
      */
+    @Schema(description = "科室名称")
     private String name;
 
     /**
      * 状态 1:启用 0:停用
      */
+    @Schema(description = "状态 1:启用 0:停用")
     private Integer status;
+
+    /**
+     * 创建时间
+     */
+    @Schema(description = "创建时间")
+    private LocalDateTime gmtCreate;
+
+    /**
+     * 更新时间
+     */
+    @Schema(description = "更新时间")
+    private LocalDateTime gmtModified;
 
 }

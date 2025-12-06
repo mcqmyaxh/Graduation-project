@@ -9,13 +9,19 @@ import org.springdoc.core.models.GroupedOpenApi;
 public class GroupedOpenApiConfig {
 
 
-
-
-
     @Bean
     public GroupedOpenApi managementApi() {
         return GroupedOpenApi.builder()
                 .group("管理平台模块") // 这个名字会显示在左上角的下拉框中
+                .packagesToScan("com.example.patient.Management") // 指定扫描的包路径
+                .build();
+    }
+
+
+    @Bean
+    public GroupedOpenApi customerApi() {
+        return GroupedOpenApi.builder()
+                .group("用户平台模块") // 这个名字会显示在左上角的下拉框中
                 .packagesToScan("com.example.patient.Customer") // 指定扫描的包路径
                 .build();
     }

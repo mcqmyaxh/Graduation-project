@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 
 import java.io.Serial;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -91,8 +92,18 @@ public class ServiceOrders implements Serializable {
      */
     private BigDecimal price;
 
-    private LocalDateTime createdAt;
 
-    private LocalDateTime updatedAt;
+
+    /**
+     * 创建时间
+     */
+    @Schema(description = "创建时间")
+    private LocalDateTime gmtCreate;
+
+    /**
+     * 更新时间
+     */
+    @Schema(description = "更新时间")
+    private LocalDateTime gmtModified;
 
 }
