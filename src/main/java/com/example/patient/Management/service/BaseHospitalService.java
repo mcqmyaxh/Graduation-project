@@ -1,7 +1,7 @@
-package com.example.patient.Customer.service;
+package com.example.patient.Management.service;
 
 import com.mybatisflex.core.service.IService;
-import com.example.patient.Customer.entity.BaseHospital;
+import com.example.patient.Management.entity.BaseHospital;
 
 /**
  * 医院信息表 服务层。

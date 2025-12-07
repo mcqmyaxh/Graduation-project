@@ -1,9 +1,9 @@
-package com.example.patient.Customer.service.impl;
+package com.example.patient.Management.service.impl;
 
 import com.mybatisflex.spring.service.impl.ServiceImpl;
-import com.example.patient.Customer.entity.BaseHospital;
-import com.example.patient.Customer.mapper.BaseHospitalMapper;
-import com.example.patient.Customer.service.BaseHospitalService;
+import com.example.patient.Management.entity.BaseHospital;
+import com.example.patient.Management.mapper.BaseHospitalMapper;
+import com.example.patient.Management.service.BaseHospitalService;
 import org.springframework.stereotype.Service;
 
 /**

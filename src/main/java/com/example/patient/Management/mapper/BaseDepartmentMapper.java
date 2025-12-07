@@ -1,7 +1,7 @@
-package com.example.patient.Customer.mapper;
+package com.example.patient.Management.mapper;
 
 import com.mybatisflex.core.BaseMapper;
-import com.example.patient.Customer.entity.BaseDepartment;
+import com.example.patient.Management.entity.BaseDepartment;
 
 /**
  * 科室信息表 映射层。

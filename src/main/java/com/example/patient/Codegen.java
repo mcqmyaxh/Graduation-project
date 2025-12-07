@@ -16,8 +16,8 @@ public class Codegen {
 
         // 创建全局配置
         GlobalConfig globalConfig = new GlobalConfig();
-        globalConfig.setBasePackage("com.example.patient.Customer"); // 设置根包名
-        globalConfig.setGenerateTable("user_patient"); // 指定生成哪些表//
+        globalConfig.setBasePackage("com.example.patient.Management"); // 设置根包名
+        globalConfig.setGenerateTable("base_hospital_dept_mapping"); // 指定生成哪些表//
         //KKHourse.sys_menu
         //KKHourse.sys_role
         //KKHourse.sys_role_menu
