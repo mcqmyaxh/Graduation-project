@@ -30,8 +30,26 @@ public class BaseDepartmentServiceImpl extends ServiceImpl<BaseDepartmentMapper,
      *
      * @param hospitalId
      */
+
     @Override
-    public List<BaseDepartment> listByHospitalId(Integer hospitalId) {
-        return null;
+    public List<BaseDepartment> listByHospitalDepartmentId(Integer hospitalId) {
+        return queryChain()
+                .where(BaseDepartment::getHospitalId).eq(hospitalId)
+                .eq(BaseDepartment::getStatus, 1) // 仅查询启用的科室
+                .list();
+    }
+
+    @Override
+    public BaseDepartment getDepartmentById(Integer deptId) {
+        return this.getById(deptId);
+    }
+
+    // 停用/启用科室
+    @Override
+    public boolean updateHospitalDepartmentStatus(Integer deptId, Integer status) {
+        return updateChain()
+                .set(BaseDepartment::getStatus, status)
+                .where(BaseDepartment::getDeptId).eq(deptId)
+                .update();
     }
 }

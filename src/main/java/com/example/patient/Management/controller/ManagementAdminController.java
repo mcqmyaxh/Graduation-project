@@ -7,6 +7,7 @@ import com.example.patient.util.exp.ResultData;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +19,7 @@ import java.util.*;
 @RestController
 @RequestMapping("/Platform")
 //@Tag(name = "管理员平台接口", description = "管理员信息管理操作接口")
+@Slf4j
 public class ManagementAdminController {
     @Resource
     private ManagementAdminService managementAdminService;
