@@ -2,6 +2,9 @@ package com.example.patient.Customer.service.impl;
 
 import com.example.patient.DTO.Command.RegisterUserCommand;
 import com.example.patient.DTO.Command.UpdateUserCommand;
+import com.example.patient.Management.entity.ManagementAdmin;
+import com.mybatisflex.core.query.QueryWrapper;
+import com.mybatisflex.processor.util.StrUtil;
 import com.mybatisflex.spring.service.impl.ServiceImpl;
 import com.example.patient.Customer.entity.UserPatient;
 import com.example.patient.Customer.mapper.UserPatientMapper;
@@ -45,11 +48,29 @@ public class UserPatientServiceImpl extends ServiceImpl<UserPatientMapper, UserP
 
     @Override
     public List<UserPatient> listUsers(UserPatient userPatient) {
+
         return null;
     }
 
     @Override
     public UserPatient loginUser(String username, String password) {
-        return null;
+        if (StrUtil.isBlank(username) || StrUtil.isBlank(password)) {
+            return null;
+        }
+        // 1. 查手机号
+        UserPatient userPatient = this.mapper.selectOneByQuery(
+                QueryWrapper.create().eq(UserPatient::getPhone, username));
+        if (userPatient == null) {
+            return null;
+        }
+        // 2. 直接比较明文密码（取消BCrypt加密验证）
+        String dbPassword = userPatient.getPassword();
+        boolean match = password.equals(dbPassword);
+        if (!match) {
+            return null;
+        }
+        // 3. 脱敏后返回
+        userPatient.setPassword(null);
+        return userPatient;
     }
 }
