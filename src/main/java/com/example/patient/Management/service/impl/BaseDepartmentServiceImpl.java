@@ -6,12 +6,7 @@ import com.example.patient.Management.entity.BaseDepartment;
 import com.example.patient.Management.mapper.BaseDepartmentMapper;
 import com.example.patient.Management.service.BaseDepartmentService;
 import org.springframework.stereotype.Service;
-import com.mybatisflex.core.query.QueryWrapper;
-import com.mybatisflex.spring.service.impl.ServiceImpl;
-import com.example.patient.Management.entity.BaseDepartment;
-import com.example.patient.Management.mapper.BaseDepartmentMapper;
-import com.example.patient.Management.service.BaseDepartmentService;
-import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 import java.util.List;
