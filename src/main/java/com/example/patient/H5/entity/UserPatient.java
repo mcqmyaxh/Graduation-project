@@ -1,4 +1,4 @@
-package com.example.patient.Customer.entity;
+package com.example.patient.H5.entity;
 
 import com.mybatisflex.annotation.Id;
 import com.mybatisflex.annotation.KeyType;

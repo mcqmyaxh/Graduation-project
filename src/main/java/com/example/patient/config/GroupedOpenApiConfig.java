@@ -33,6 +33,13 @@ public class GroupedOpenApiConfig {
                 .packagesToScan("com.example.patient.registry.presentation.controller")
                 .build();
     }
+    @Bean
+    public GroupedOpenApi h5Api() {
+        return GroupedOpenApi.builder()
+                .group("H5平台模块") // 这个名字会显示在左上角的下拉框中
+                .packagesToScan("com.example.patient.H5") // 指定扫描的包路径
+                .build();
+    }
 
     @Bean
     public GroupedOpenApi testApi() {
