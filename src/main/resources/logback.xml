@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false">
+
+    <!-- 变量定义 -->
+    <springProperty name="application" source="spring.application.name" />
+    <property name="PATTERN" value="${application} %d{yyyy-MM-dd HH:mm:ss} [%-4level] %logger{}:%L [%thread] %msg%n" />
+
+    <!-- 控制台输出 appender -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Loki 输出 appender -->
+    <appender name="lokiAppender" class="com.github.loki4j.logback.Loki4jAppender">
+        <batchTimeoutMs>1000</batchTimeoutMs>
+        <http class="com.github.loki4j.logback.ApacheHttpSender">
+            <url>http://8.138.204.57:3100/loki/api/v1/push</url>
+        </http>
+        <format>
+            <label>
+                <pattern>system=${application},level=%level,logType=%X{log_file_type:-logType}</pattern>
+            </label>
+            <message>
+                <pattern>${PATTERN}</pattern>
+            </message>
+            <sortByTime>true</sortByTime>
+        </format>
+    </appender>
+
+    <!-- 日志输出到控制台和 Loki -->
+    <root level="info">
+        <appender-ref ref="console" />
+        <appender-ref ref="lokiAppender" />
+    </root>
+
+</configuration>
