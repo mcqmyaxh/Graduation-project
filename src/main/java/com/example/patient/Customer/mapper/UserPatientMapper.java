@@ -1,7 +1,7 @@
-package com.example.patient.H5.mapper;
+package com.example.patient.Customer.mapper;
 
 import com.mybatisflex.core.BaseMapper;
-import com.example.patient.H5.entity.UserPatient;
+import com.example.patient.Customer.entity.UserPatient;
 
 /**
  * 患者/家属信息表 映射层。
