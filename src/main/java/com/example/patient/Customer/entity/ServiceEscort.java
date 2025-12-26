@@ -38,7 +38,7 @@ public class ServiceEscort implements Serializable {
     private Integer escortId;
 
     /**
-     * 登录账号/手机号
+     * 登录账号
      */
     private String username;
 

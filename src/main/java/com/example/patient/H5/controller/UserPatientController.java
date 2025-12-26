@@ -33,7 +33,7 @@ public class UserPatientController {
     private UserPatientService userService;
 
 
-    @PostMapping("/register")
+    @PostMapping("/PatientRegister")
     @Operation(summary = "患者/用户注册", description = "患者或家属用户注册接口，需提供基本信息")
     public ResultData<Boolean> registerPatient(@Valid @RequestBody RegisterUserCommand command) {
         log.info("患者注册请求：手机号={}", command.getPhone());
@@ -41,7 +41,7 @@ public class UserPatientController {
         return result ? ResultData.success(result, "注册成功") : ResultData.failed("注册失败");
     }
 
-    @PostMapping("/login/phone")
+    @PostMapping("/PatientLoginPhone")
     @Operation(summary = "手机号登录", description = "患者/用户通过手机号+密码进行登录")
     public ResultData<H5LoginVO> loginByPhone(
             @Parameter(description = "手机号", required = true)
@@ -57,7 +57,7 @@ public class UserPatientController {
         return result != null ? ResultData.success(result, "登录成功") : ResultData.failed("用户名或密码错误");
     }
 
-    @PostMapping("/login/username")
+    @PostMapping("/PatientLoginUsername")
     @Operation(summary = "用户名登录", description = "患者/用户通过用户名+密码进行登录")
     public ResultData<H5LoginVO> loginByUsername(
             @Parameter(description = "用户名", required = true)
@@ -73,7 +73,7 @@ public class UserPatientController {
         return result != null ? ResultData.success(result, "登录成功") : ResultData.failed("用户名或密码错误");
     }
 
-    @PutMapping("/update")
+    @PutMapping("/updatePatientInfo")
     @Operation(summary = "更新患者/用户信息", description = "更新患者或家属的个人信息")
     public ResultData<Boolean> updatePatient(@Valid @RequestBody UpdateUserCommand command) {
         log.info("更新患者信息请求：patientId={}", command.getPatientId());
@@ -81,7 +81,7 @@ public class UserPatientController {
         return result ? ResultData.success(result, "更新成功") : ResultData.failed("更新失败");
     }
 
-    @GetMapping("/list")
+    @GetMapping("/listPatientInfo")
     @Operation(summary = "分页获取患者/用户列表", description = "获取所有患者/用户信息列表（分页查询）")
     public ResultData<Page<UserPatient>> listPatients(
             @Parameter(description = "页码", example = "1")
@@ -98,7 +98,7 @@ public class UserPatientController {
         return result != null ? ResultData.success(result, "获取成功") : ResultData.failed("获取失败");
     }
 
-    @GetMapping("/info")
+    @GetMapping("/getuserinfo")
     @Operation(summary = "获取患者/用户信息", description = "根据ID获取单个患者/用户的详细信息")
     public ResultData<H5LoginVO> getPatientInfo(
             @Parameter(description = "患者ID", required = true, example = "1")
@@ -110,7 +110,7 @@ public class UserPatientController {
         return result != null ? ResultData.success(result, "获取成功") : ResultData.failed("患者信息不存在");
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/deletePatinet")
     @Operation(summary = "删除/注销患者账号", description = "逻辑删除/注销患者/用户账号（状态从1变为0）")
     public ResultData<Boolean> deletePatient(@Valid @RequestBody DeleteUserCommand command) {
         log.info("删除患者账号请求：patientId={}, operatorId={}", command.getPatientId(), command.getOperatorId());
