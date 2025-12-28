@@ -1,8 +1,10 @@
 package com.example.patient.Customer.service;
 
+import com.example.patient.Customer.entity.ServiceOrders;
 import com.example.patient.DTO.Command.*;
 import com.example.patient.DTO.VO.EscorLoginVO;
 
+import com.example.patient.DTO.VO.EscortOrderDetailVO;
 import com.example.patient.DTO.VO.H5LoginVO;
 import com.mybatisflex.core.paginate.Page;
 import com.mybatisflex.core.service.IService;
@@ -59,4 +61,69 @@ public interface ServiceEscortService extends IService<ServiceEscort> {
      */
     EscorLoginVO getEscortInfo(Integer escortId);
 
+    /**
+     * 陪诊员查看自身接过的所有订单
+     * @param escortId 陪诊员ID
+     * @param pageNum 页码
+     * @param pageSize 每页大小
+     * @return 订单分页列表
+     */
+    Page<ServiceOrders> listEscortOrders(Integer escortId, Integer pageNum, Integer pageSize);
+
+    /**
+     * 陪诊员查看订单大厅（待接单的订单）
+     * @param pageNum 页码
+     * @param pageSize 每页大小
+     * @param escortId 陪诊员ID（用于检查时间冲突）
+     * @return 待接单订单分页列表
+     */
+    Page<ServiceOrders> listAvailableOrders(Integer pageNum, Integer pageSize, Integer escortId);
+
+    /**
+     * 陪诊员接单
+     * @param orderId 订单ID
+     * @param escortId 陪诊员ID
+     * @return 接单是否成功
+     */
+    Boolean acceptOrder(Long orderId, Integer escortId);
+
+    /**
+     * 陪诊员取消接单
+     * @param orderId 订单ID
+     * @param escortId 陪诊员ID
+     * @return 取消是否成功
+     */
+    Boolean cancelAcceptOrder(Long orderId, Integer escortId);
+
+    /**
+     * 陪诊员结束订单
+     * @param orderId 订单ID
+     * @param escortId 陪诊员ID
+     * @return 结束是否成功
+     */
+    Boolean completeOrder(Long orderId, Integer escortId);
+
+    /**
+     * 查看被投诉的订单
+     * @param escortId 陪诊员ID
+     * @param pageNum 页码
+     * @param pageSize 每页大小
+     * @return 被投诉订单分页列表
+     */
+    Page<ServiceOrders> listComplaintedOrders(Integer escortId, Integer pageNum, Integer pageSize);
+
+    /**
+     * 查看陪诊员当前正在进行中的订单
+     * @param escortId 陪诊员ID
+     * @return 当前订单信息
+     */
+    ServiceOrders getCurrentOrder(Integer escortId);
+
+    /**
+     * 订单详情：查看患者信息、病情描述、疾病史
+     * @param orderId 订单ID
+     * @param escortId 陪诊员ID（用于权限验证）
+     * @return 订单详情信息
+     */
+    EscortOrderDetailVO getOrderDetail(Long orderId, Integer escortId);
 }

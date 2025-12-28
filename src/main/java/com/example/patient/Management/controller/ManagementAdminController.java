@@ -19,7 +19,7 @@ import java.util.*;
 @Slf4j
 @RestController
 @RequestMapping("/Platform")
-@Tag(name = "管理员平台接口", description = "管理员信息管理操作接口")
+@Tag(name = "管理员信息接口", description = "管理员信息管理操作接口")
 public class ManagementAdminController {
     @Resource
     private ManagementAdminService managementAdminService;
@@ -30,7 +30,6 @@ public class ManagementAdminController {
      */
     @PostMapping("/addAdmin")
     @Operation(summary = "新增管理员", description = "新增管理员接口（手机号唯一）")
-    @Tag(name = "管理员信息")
     @PreAuthorize("@ss.hasPermission('addAdmin')")
     public ResultData<Boolean> addAdmin(@RequestBody ManagementAdmin managementAdmin) {
         Boolean result = managementAdminService.addAdmin(managementAdmin);
@@ -47,7 +46,6 @@ public class ManagementAdminController {
      */
     @DeleteMapping("/deleteAdmin")
     @Operation(summary = "删除管理员(暂时别用)", description = "删除管理员接口")
-    @Tag(name = "管理员信息")
     @PreAuthorize("@ss.hasPermission('deleteAdmin')")
     public ResultData<Boolean> deleteAdmin(@RequestParam("adminId") Long adminId){
         Boolean result = managementAdminService.deleteAdmin(adminId);
@@ -60,7 +58,6 @@ public class ManagementAdminController {
      */
     @PutMapping("/updateAdmin")
     @Operation(summary = "更新管理员信息(暂时别用)", description = "更新管理员信息接口")
-    @Tag(name = "管理员信息")
     @PreAuthorize("@ss.hasPermission('updateAdmin')")
     public ResultData<Boolean> updateAdmin(@RequestBody UpdateAdminCommand command){
         Boolean result = managementAdminService.updateAdmin(command);
@@ -73,7 +70,6 @@ public class ManagementAdminController {
      */
     @GetMapping("/getAdmin")
     @Operation(summary = "获取单个管理员信息(暂时别用)", description = "获取单个管理员信息")
-    @Tag(name = "管理员信息")
     @PreAuthorize("@ss.hasPermission('getAdmin')")
     public ResultData<ManagementAdmin> getAdmin(
             @RequestParam(value = "adminId", required = false) BigInteger adminId,
@@ -96,7 +92,6 @@ public class ManagementAdminController {
      */
     @GetMapping("/listAdmins")
     @Operation(summary = "获取管理员列表(暂时别用)", description = "获取管理员列表")
-    @Tag(name = "管理员信息")
     @PreAuthorize("@ss.hasPermission('listAdmins')")
     public ResultData<List<ManagementAdmin>> listAdmins(
             @RequestParam(value = "realName", required = false) String realName,
@@ -123,7 +118,6 @@ public class ManagementAdminController {
      */
     @PostMapping("/adminlogin")
     @Operation(summary = "管理员登录", description = "手机号+密码登录")
-    @Tag(name = "管理员信息")
     @PreAuthorize("@ss.hasPermission('adminlogin')")
     public ResultData<Map<String, Object>> adminLogin(
             @RequestParam("adminPhone") String adminPhone,

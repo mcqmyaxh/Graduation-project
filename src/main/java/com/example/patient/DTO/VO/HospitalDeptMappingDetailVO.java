@@ -1,9 +1,11 @@
 package com.example.patient.DTO.VO;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 @Schema(description = "医院科室号源映射详情VO")
 public class HospitalDeptMappingDetailVO {
 
